@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Biodata Inline</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <style>
+      .form-inline .form-group {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Form Biodata (Inline)</h2>
+
+      <form class="form-inline" action="proses-biodata.php" method="post">
+        <div class="form-group">
+          <label for="nama" class="sr-only">Nama Lengkap</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            name="nama"
+            placeholder="Nama Lengkap"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tempat_lahir" class="sr-only">Tempat Lahir</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tempat_lahir"
+            name="tempat_lahir"
+            placeholder="Tempat Lahir"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tanggal_lahir" class="sr-only">Tanggal Lahir</label>
+          <input
+            type="date"
+            class="form-control"
+            id="tanggal_lahir"
+            name="tanggal_lahir"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="alamat" class="sr-only">Alamat</label>
+          <input
+            type="text"
+            class="form-control"
+            id="alamat"
+            name="alamat"
+            placeholder="Alamat"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telepon" class="sr-only">Telepon</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="telepon"
+            name="telepon"
+            placeholder="No. Telepon"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="sr-only">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="pendidikan" class="sr-only">Pendidikan</label>
+          <select
+            class="form-control"
+            id="pendidikan"
+            name="pendidikan"
+            required
+          >
+            <option value="">Pilih Pendidikan</option>
+            <option value="SMA">SMA/SMK</option>
+            <option value="D3">Diploma (D3)</option>
+            <option value="S1">Sarjana (S1)</option>
+            <option value="S2">Magister (S2)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pekerjaan" class="sr-only">Pekerjaan</label>
+          <input
+            type="text"
+            class="form-control"
+            id="pekerjaan"
+            name="pekerjaan"
+            placeholder="Pekerjaan"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="hobi" class="sr-only">Hobi</label>
+          <input
+            type="text"
+            class="form-control"
+            id="hobi"
+            name="hobi"
+            placeholder="Hobi"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Jenis Kelamin</label><br />
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="jenis_kelamin"
+              value="Laki-laki"
+              required
+            />
+            Laki-laki
+          </label>
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="jenis_kelamin"
+              value="Perempuan"
+              required
+            />
+            Perempuan
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kirim</button>
+      </form>
+    </div>
+  </body>
+</html>

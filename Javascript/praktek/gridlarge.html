@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Grid Large</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>Large Grid</h1>
+      <p>
+        Contoh berikut akan menghasilkan pembagian 25%/75% pada perangkat kecil.
+        pembagian 50%/50% pada perangkat sedang, dan pembagian 33%/66% pada
+        perangkat Besar. Pada perangkat ekstra kecil, itu akan secara otomatis
+        menumpuk (100%)
+      </p>
+
+      <p>Ubah ukuran jendela browser untuk melihat efeknya</p>
+
+      <div class="row">
+        <div
+          class="col-sm-3 col-md-6 col-lg-4"
+          style="background-color: yellow"
+        >
+          Pada Blok Kuning ini akan menghasilkan 3 tampilan ukuran yang berbeda
+          pada layar Website, Jika tampilan Browser Website di besarkan maka
+          ukuran blok akan 33% dan 66%, jika ukuran Browser Website sedang maka
+          50% dan 50%, dan jika di kecilkan maka ukuran browser 22% dan 75%,
+          tetapi jika browser website nya di minimize terkecil maka akan sama
+          Besar pada Blok sebelahnya
+        </div>
+        <div class="col-sm-9 col-md-6 col-lg-8" style="background-color: pink">
+          Pada Blok Merah Jambu ini akan menghasilkan 3 tampilan ukuran yang
+          berbeda pada layar Website.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

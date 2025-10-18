@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap Dropdown Horizontal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      .dropdown-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap; /* biar responsive */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Jadwal Perkuliahan Kelas Sistem Informasi B Pagi Sem II</h2>
+
+      <div class="dropdown-container">
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Senin <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Pemrograman Web</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Selasa <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Pemrograman Berorientasi Objek</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Rabu <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Interaksi Manusia dan Komputer</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Kamis <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Basis Data</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Jum'at <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Manajemen Sistem Informasi</a></li>
+            <li><a href="#">Statistik dan Probabilitas</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Sabtu <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Bahasa Inggris II</a></li>
+            <li><a href="#">Pendidikan Agama II</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

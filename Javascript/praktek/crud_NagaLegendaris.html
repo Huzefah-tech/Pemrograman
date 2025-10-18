@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id"
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRUD Naga Legendaris</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1e272e;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #16a085;
+    }
+
+    .card {
+      background-color: #ecf0f1;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #34495e;
+    }
+
+    .card p {
+      margin: 5px 0;
+    }
+
+    .card .btn-group {
+      margin-top: 10px;
+    }
+
+    .btn-group button {
+      background-color: #3498db;
+      margin-right: 5px;
+    }
+
+    .btn-group button:last-child {
+      background-color: #e74c3c;
+    }
+
+  </style>
+</head>
+<body>
+  
+<header>
+  <h1>CRUD Naga Legendaris</h1>
+</header>
+
+<div class="container">
+<h2>Tambah Naga</h2>
+<form action="">
+  <input type="text" placeholder="Nama Naga" required>
+  <input type="text" placeholder="Elemen (Api, Es, Petir...)" required>
+  <input type="number" placeholder="Kekuatan (1-100)" required>
+  <button type="submit">Tambahkan</button>
+</form>
+<div class="card">
+<h3>Nama: Draco</h3>
+<p>Elemen: Api</p>
+<p>Kekuatan: 95</p>
+<div class="btn-group">
+  <button>Edit</button>
+  <button>Hapus</button>
+</div>
+</div>
+<div class="card">
+      <h3>Nama: Frostwing</h3>
+      <p>Elemen: Es</p>
+      <p>Kekuatan: 87</p>
+      <div class="btn-group">
+        <button>Edit</button>
+        <button>Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

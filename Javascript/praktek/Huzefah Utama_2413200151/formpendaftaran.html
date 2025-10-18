@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Pendaftaran</title>
+  </head>
+  <body>
+    <h1><b>Form Pendaftaran</b></h1>
+    <hr />
+
+    <form>
+      <table>
+        <tr>
+          <td><label for="nim">NIM</label></td>
+          <td>:</td>
+          <td><input type="text" id="nim" name="nim" /></td>
+        </tr>
+        <tr>
+          <td><label for="nama">NAMA</label></td>
+          <td>:</td>
+          <td><input type="text" id="nama" name="nama" /></td>
+        </tr>
+        <tr>
+          <td>JENIS KELAMIN</td>
+          <td>:</td>
+          <td>
+            <input type="radio" id="pria" name="jk" value="Pria" />
+            <label for="pria">Pria</label>
+            <input type="radio" id="wanita" name="jk" value="Wanita" />
+            <label for="wanita">Wanita</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="agama">AGAMA</label></td>
+          <td>:</td>
+          <td>
+            <select id="agama" name="agama">
+              <option value="Islam">Islam</option>
+              <option value="Kristen">Kristen</option>
+              <option value="Hindu">Hindu</option>
+              <option value="Budha">Budha</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>STATUS</td>
+          <td>:</td>
+          <td>
+            <input type="radio" id="kawin" name="status" value="Kawin" />
+            <label for="kawin">Kawin</label>
+            <input type="radio" id="belum" name="status" value="Belum Kawin" />
+            <label for="belum">Belum Kawin</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="jurusan">JURUSAN</label></td>
+          <td>:</td>
+          <td>
+            <select id="jurusan" name="jurusan">
+              <option value="Teknik Informatika">Teknik Informatika</option>
+              <option value="Sistem Informasi">Sistem Informasi</option>
+              <option value="Teknik Komputer">Teknik Komputer</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">KETERANGAN</td>
+          <td valign="top">:</td>
+          <td>
+            <textarea name="keterangan" rows="5" cols="40"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <input type="submit" value="kirim" />
+            <input type="reset" value="ulang" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

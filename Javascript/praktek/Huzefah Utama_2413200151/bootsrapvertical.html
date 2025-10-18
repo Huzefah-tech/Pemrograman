@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Biodata Vertikal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- JS Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Form Biodata Vertikal</h2>
+
+      <form action="proses-biodata.php" method="post">
+        <!-- 1. Nama Lengkap -->
+        <div class="form-group">
+          <label for="nama">Nama Lengkap:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama lengkap"
+          />
+        </div>
+
+        <!-- 2. Tempat Lahir -->
+        <div class="form-group">
+          <label for="tempat_lahir">Tempat Lahir:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tempat_lahir"
+            name="tempat_lahir"
+            placeholder="Masukkan tempat lahir"
+          />
+        </div>
+
+        <!-- 3. Tanggal Lahir -->
+        <div class="form-group">
+          <label for="tanggal_lahir">Tanggal Lahir:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="tanggal_lahir"
+            name="tanggal_lahir"
+          />
+        </div>
+
+        <!-- 4. Jenis Kelamin -->
+        <div class="form-group">
+          <label>Jenis Kelamin:</label><br />
+          <label class="radio-inline"
+            ><input type="radio" name="jenis_kelamin" value="Laki-laki" />
+            Laki-laki</label
+          >
+          <label class="radio-inline"
+            ><input type="radio" name="jenis_kelamin" value="Perempuan" />
+            Perempuan</label
+          >
+        </div>
+
+        <!-- 5. Alamat -->
+        <div class="form-group">
+          <label for="alamat">Alamat:</label>
+          <textarea
+            class="form-control"
+            id="alamat"
+            name="alamat"
+            rows="3"
+            placeholder="Masukkan alamat lengkap"
+          ></textarea>
+        </div>
+
+        <!-- 6. Nomor Telepon -->
+        <div class="form-group">
+          <label for="telepon">No. Telepon:</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="telepon"
+            name="telepon"
+            placeholder="Contoh: 08123456789"
+          />
+        </div>
+
+        <!-- 7. Email -->
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Masukkan email"
+          />
+        </div>
+
+        <!-- 8. Pendidikan Terakhir -->
+        <div class="form-group">
+          <label for="pendidikan">Pendidikan Terakhir:</label>
+          <select class="form-control" id="pendidikan" name="pendidikan">
+            <option value="">-- Pilih --</option>
+            <option value="SMA">SMA/SMK</option>
+            <option value="D3">Diploma (D3)</option>
+            <option value="S1">Sarjana (S1)</option>
+            <option value="S2">Magister (S2)</option>
+          </select>
+        </div>
+
+        <!-- 9. Pekerjaan -->
+        <div class="form-group">
+          <label for="pekerjaan">Pekerjaan:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="pekerjaan"
+            name="pekerjaan"
+            placeholder="Masukkan pekerjaan"
+          />
+        </div>
+
+        <!-- 10. Hobi -->
+        <div class="form-group">
+          <label for="hobi">Hobi:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="hobi"
+            name="hobi"
+            placeholder="Masukkan hobi"
+          />
+        </div>
+
+        <!-- Tombol Submit -->
+        <button type="submit" class="btn btn-primary">Kirim</button>
+      </form>
+    </div>
+  </body>
+</html>
