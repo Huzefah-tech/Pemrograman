@@ -19,6 +19,6 @@ Python/python.exe
 __pycache__/
 *.pyc
 *.pyo
-
+*.xlsx
 
 PHP/
