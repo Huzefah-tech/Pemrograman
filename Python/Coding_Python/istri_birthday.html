@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Happy Birthday, Alisa 💙</title>
+    <style>
+      :root {
+        --bg-top: #e6f3ff;
+        --bg-bottom: #0a1a2f;
+        --text-color: #e0f7ff;
+        --glow1: rgba(123, 205, 255, 0.9);
+        --glow2: rgba(54, 150, 255, 0.6);
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue",
+          Arial;
+      }
+      body {
+        background: radial-gradient(
+          circle at 20% 10%,
+          var(--bg-top),
+          var(--bg-bottom) 60%
+        );
+        overflow: hidden;
+        color: var(--text-color);
+      }
+
+      /* slideshow container */
+      .slideshow {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+        overflow: hidden;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        filter: saturate(1.05) contrast(1.02);
+      }
+      .slide.show {
+        opacity: 1;
+      }
+
+      /* overlay (dark tint + aurora glow) */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 20, 40, 0.15),
+          rgba(6, 10, 20, 0.45)
+        );
+        mix-blend-mode: screen;
+      }
+
+      /* canvas on top for snow + aurora */
+      #fxCanvas {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+      }
+
+      /* center message */
+      #message {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateY(30px);
+        z-index: 3;
+        text-align: center;
+        color: var(--text-color);
+        font-size: clamp(24px, 3.5vw, 48px);
+        font-weight: 700;
+        letter-spacing: 2px;
+        opacity: 0;
+        text-shadow: 0 0 12px rgba(170, 220, 255, 0.7),
+          0 0 30px rgba(140, 180, 255, 0.35);
+        animation: msgIn 2.8s ease forwards 1.8s;
+      }
+
+      @keyframes msgIn {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) translateY(40px) scale(0.98);
+          filter: blur(6px);
+        }
+        70% {
+          opacity: 1;
+          transform: translate(-50%, -50%) translateY(0) scale(1.01);
+          filter: blur(0);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateY(0) scale(1);
+        }
+      }
+
+      /* small subtitle */
+      #subtitle {
+        margin-top: 0.6rem;
+        font-size: clamp(12px, 1.6vw, 18px);
+        opacity: 0.95;
+        color: #cfefff;
+        font-weight: 500;
+      }
+
+      /* play button */
+      #playBtn {
+        position: fixed;
+        right: 22px;
+        bottom: 18px;
+        z-index: 5;
+        background: linear-gradient(180deg, #aee7ff, #76c7ff);
+        border: none;
+        padding: 12px 14px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(20, 60, 120, 0.25);
+        font-weight: 700;
+        cursor: pointer;
+        color: #03263f;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      #playBtn small {
+        font-weight: 600;
+        font-size: 12px;
+        color: #002033;
+        opacity: 0.9;
+      }
+
+      /* responsive */
+      @media (max-width: 600px) {
+        #message {
+          font-size: 22px;
+          top: 45%;
+        }
+        #playBtn {
+          padding: 10px 12px;
+          right: 12px;
+          bottom: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 3 gambar slideshow: letakkan alisa1.jpg alisa2.jpg alisa3.jpg di folder yang sama dengan file ini -->
+    <div class="slideshow" id="slideshow">
+      <div
+        class="slide"
+        id="s1"
+        style="background-image: url('alisa1.jpg')"
+      ></div>
+      <div
+        class="slide"
+        id="s2"
+        style="background-image: url('alisa2.jpg')"
+      ></div>
+      <div
+        class="slide"
+        id="s3"
+        style="background-image: url('alisa3.jpg')"
+      ></div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <canvas id="fxCanvas"></canvas>
+
+    <div id="message">
+      🎂 Happy Birthday, Alisa Mikhailovna Kujou 💙
+      <div id="subtitle">
+        — may your days be gentle as snow and bright as auroras —
+      </div>
+    </div>
+
+    <!-- audio placeholder: ganti src ke file mp3 milikmu (letakkan di folder yang sama) -->
+    <audio id="bgm" loop>
+      <!-- contoh: <source src="alisa_theme.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <button id="playBtn" title="Play music & start animation">
+      ▶ Play
+      <small>Music & Effects</small>
+    </button>
+
+    <script>
+      /* ------------------------------
+   Slideshow control (fade)
+   ------------------------------ */
+      const slides = [
+        document.getElementById("s1"),
+        document.getElementById("s2"),
+        document.getElementById("s3"),
+      ];
+      let idx = 0;
+      const SLIDE_TIME = 6000; // ms per slide
+
+      function showSlide(i) {
+        slides.forEach((s, k) => s.classList.toggle("show", k === i));
+      }
+      showSlide(0);
+      setInterval(() => {
+        idx = (idx + 1) % slides.length;
+        showSlide(idx);
+      }, SLIDE_TIME);
+
+      /* ------------------------------
+   Canvas: snow + aurora effect
+   ------------------------------ */
+      const canvas = document.getElementById("fxCanvas");
+      const ctx = canvas.getContext("2d");
+      function resize() {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+      }
+      window.addEventListener("resize", resize, { passive: true });
+      resize();
+
+      /* Snow particles */
+      class Snow {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * -canvas.height;
+          this.r = Math.random() * 2.6 + 0.6;
+          this.vy = Math.random() * 0.6 + 0.3;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.alpha = Math.random() * 0.8 + 0.2;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.y > canvas.height + 10) this.reset();
+          if (this.x < -10) this.x = canvas.width + 10;
+          if (this.x > canvas.width + 10) this.x = -10;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(230,245,255,${this.alpha})`;
+          ctx.shadowBlur = Math.min(14, this.r * 6);
+          ctx.shadowColor = "#d9f4ff";
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      const snowflakes = [];
+      for (let i = 0; i < 220; i++) snowflakes.push(new Snow());
+
+      /* Aurora: layered moving gradient waves */
+      function drawAurora(time) {
+        const t = time * 0.0006;
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, canvas.height * 0.22 + Math.sin(t * 1.2 + i) * 80);
+          for (let x = 0; x < canvas.width; x += 20) {
+            const y =
+              canvas.height * 0.22 +
+              Math.sin(x * 0.008 + t * 0.9 + i) * (80 + i * 30);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.closePath();
+          const grad = ctx.createLinearGradient(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+          if (i === 0) {
+            grad.addColorStop(0, "rgba(120,200,255,0.06)");
+            grad.addColorStop(1, "rgba(120,200,255,0.02)");
+          } else if (i === 1) {
+            grad.addColorStop(0, "rgba(160,220,255,0.06)");
+            grad.addColorStop(1, "rgba(160,220,255,0.01)");
+          } else {
+            grad.addColorStop(0, "rgba(70,150,255,0.03)");
+            grad.addColorStop(1, "rgba(70,150,255,0.0)");
+          }
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+      }
+
+      /* main animate loop */
+      let lastTime = 0;
+      function animate(time) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // subtle dim overlay for depth
+        ctx.fillStyle = "rgba(5,10,18,0.25)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // aurora at top
+        drawAurora(time);
+
+        // draw snow
+        for (let fl of snowflakes) {
+          fl.update();
+          fl.draw();
+        }
+
+        lastTime = time;
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+
+      /* ------------------------------
+   Music & Play button
+   ------------------------------ */
+      const bgm = document.getElementById("bgm");
+      const playBtn = document.getElementById("playBtn");
+      let playing = false;
+
+      // User will add music file: example add <source src="alisa_theme.mp3" type="audio/mpeg"> inside <audio id="bgm"> tag
+      // Or programmatically: bgm.src = 'alisa_theme.mp3'; bgm.load();
+
+      // Play / Pause handler
+      playBtn.addEventListener("click", () => {
+        // If no source set, just toggle visual animations (still fine)
+        if (bgm.querySelector("source") === null && !bgm.src) {
+          // no music provided - simply animate and show an indicator
+          if (!playing) {
+            playBtn.textContent = "⏸ Pause";
+            const small = document.createElement("small");
+            small.textContent = " Music (none)";
+            playBtn.appendChild(small);
+            playing = true;
+          } else {
+            playBtn.textContent = "▶ Play";
+            playing = false;
+          }
+          return;
+        }
+
+        if (!playing) {
+          bgm.play().catch(() => {
+            /* autoplay blocked */
+          });
+          playBtn.innerHTML = "⏸ Pause <small>Music & Effects</small>";
+          playing = true;
+        } else {
+          bgm.pause();
+          playBtn.innerHTML = "▶ Play <small>Music & Effects</small>";
+          playing = false;
+        }
+      });
+
+      // Optional: start message animation only after first play click (for stronger sync)
+      playBtn.addEventListener("click", () => {
+        const msg = document.getElementById("message");
+        msg.style.animationPlayState = "running";
+      });
+
+      /* ------------------------------
+   Small enhancement: click adds a small sparkle (optional)
+   ------------------------------ */
+      canvas.addEventListener("click", (e) => {
+        // create a few temporary sparkles at click position
+        const sparks = [];
+        for (let i = 0; i < 20; i++) {
+          sparks.push({
+            x: e.clientX,
+            y: e.clientY,
+            vx: (Math.random() - 0.5) * 4,
+            vy: (Math.random() - 1.5) * -4,
+            life: Math.random() * 40 + 30,
+            r: Math.random() * 2 + 0.8,
+            color: `rgba(180,230,255,${Math.random() * 0.9 + 0.2})`,
+          });
+        }
+        // render these for short time using separate loop
+        let sAnim = setInterval(() => {
+          // draw on top
+          for (let sp of sparks) {
+            sp.x += sp.vx;
+            sp.y += sp.vy;
+            sp.vy += 0.12;
+            sp.life--;
+            ctx.beginPath();
+            ctx.fillStyle = sp.color;
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = "#c7f0ff";
+            ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          // remove dead
+          for (let i = sparks.length - 1; i >= 0; i--)
+            if (sparks[i].life <= 0) sparks.splice(i, 1);
+          if (sparks.length === 0) clearInterval(sAnim);
+        }, 33);
+      });
+    </script>
+  </body>
+</html>
