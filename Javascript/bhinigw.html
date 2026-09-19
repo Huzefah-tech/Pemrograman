@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Alisa 💙</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        overflow: hidden;
+        background: radial-gradient(circle at top, #e6f3ff, #0a1a2f);
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* Slideshow background */
+      .slideshow {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 3s ease-in-out;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .slide.active {
+        opacity: 1;
+      }
+
+      /* Aurora layer */
+      .aurora {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 50% 0%,
+            rgba(173, 216, 255, 0.15),
+            transparent 70%
+          ),
+          linear-gradient(120deg, rgba(100, 200, 255, 0.08), transparent 70%);
+        animation: auroraMove 10s infinite alternate;
+        z-index: 1;
+      }
+
+      @keyframes auroraMove {
+        0% {
+          background-position: 0 0, 0 0;
+        }
+        100% {
+          background-position: 50px 50px, -50px 100px;
+        }
+      }
+
+      /* Salju */
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* Pesan */
+      #message {
+        position: fixed;
+        top: 45%;
+        width: 100%;
+        text-align: center;
+        color: #e0f7ff;
+        font-size: 2.8em;
+        font-weight: bold;
+        text-shadow: 0 0 15px #a6e3ff, 0 0 35px #8fd1ff, 0 0 80px #7ccaff;
+        opacity: 0;
+        animation: fadeInText 6s ease-in-out forwards,
+          glow 3s infinite alternate;
+        z-index: 3;
+      }
+
+      @keyframes fadeInText {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #7dd6ff;
+        }
+        100% {
+          text-shadow: 0 0 30px #b3ecff, 0 0 60px #82e0ff;
+        }
+      }
+
+      /* Musik info kecil */
+      #hint {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        color: #cdeaff;
+        font-size: 1em;
+        opacity: 0.7;
+        z-index: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Ganti gambar di bawah dengan path gambar kamu -->
+    <div class="slideshow">
+      <div
+        class="slide active"
+        style="background-image: url('alisa1.png')"
+      ></div>
+      <div class="slide" style="background-image: url('alisa2.png')"></div>
+      <div class="slide" style="background-image: url('alisa3.png')"></div>
+    </div>
+
+    <div class="aurora"></div>
+    <canvas id="snow"></canvas>
+    <div id="message">🎂 Happy Birthday, Istriku Alya 🤍</div>
+    <div id="hint">(klik di mana saja untuk memulai musik 🎵)</div>
+
+    <audio id="music" loop>
+      <!-- 🎵 Ganti src ini dengan file musikmu -->
+      <source src="sekaiwakoiniochiteiru.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      // 🎵 Musik autoplay dengan klik pertama
+      const music = document.getElementById("music");
+      document.body.addEventListener(
+        "click",
+        () => {
+          music.volume = 0;
+          music.play();
+          let fade = setInterval(() => {
+            if (music.volume < 0.8) music.volume += 0.02;
+            else clearInterval(fade);
+          }, 100);
+          document.getElementById("hint").style.display = "none";
+        },
+        { once: true }
+      );
+
+      // 🌨️ Efek salju
+      const canvas = document.getElementById("snow");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      class Snow {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * -canvas.height;
+          this.size = Math.random() * 3 + 1;
+          this.speedY = Math.random() * 1 + 0.5;
+          this.speedX = Math.random() * 0.5 - 0.25;
+          this.opacity = Math.random() * 0.8 + 0.2;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y > canvas.height) this.reset();
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(210, 240, 255, ${this.opacity})`;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "#c8f0ff";
+          ctx.fill();
+        }
+      }
+
+      const snowflakes = Array.from({ length: 200 }, () => new Snow());
+      function animateSnow() {
+        ctx.fillStyle = "rgba(10, 25, 45, 0.3)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        snowflakes.forEach((f) => {
+          f.update();
+          f.draw();
+        });
+        requestAnimationFrame(animateSnow);
+      }
+      animateSnow();
+
+      // 🖼️ Slideshow berganti tiap 8 detik
+      const slides = document.querySelectorAll(".slide");
+      let index = 0;
+      setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+      }, 8000);
+    </script>
+  </body>
+</html>

@@ -22,3 +22,7 @@ __pycache__/
 *.xlsx
 
 PHP/
+
+# Folder yang diabaikan di BelajarCsharp
+BelajarCsharp/bin
+BelajarCsharp/obj

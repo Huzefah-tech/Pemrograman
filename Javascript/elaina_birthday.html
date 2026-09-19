@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Elaina 💜</title>
+    <style>
+      body {
+        margin: 0;
+        background: radial-gradient(circle at center, #2a003e, #0b0013);
+        overflow: hidden;
+        font-family: "Courier New", monospace;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      #message {
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        text-align: center;
+        color: #dcb3ff;
+        font-size: 2.5em;
+        text-shadow: 0 0 10px #c56fff, 0 0 25px #b66bff, 0 0 50px #9e5aff;
+        letter-spacing: 2px;
+        opacity: 0;
+        animation: fadeIn 4s ease-in-out forwards, glow 3s infinite alternate;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #b66bff;
+        }
+        100% {
+          text-shadow: 0 0 25px #ff9bff, 0 0 45px #b66bff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="message">🎂 Happy Birthday, Elaina 💜</div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Efek partikel ungu ajaib ✨
+      class Particle {
+        constructor(x, y, size, speedX, speedY, color) {
+          this.x = x;
+          this.y = y;
+          this.size = size;
+          this.speedX = speedX;
+          this.speedY = speedY;
+          this.color = color;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.05;
+        }
+        draw() {
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 20;
+          ctx.shadowColor = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Koleksi partikel
+      const particles = [];
+
+      function createParticle() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 5 + 2;
+        const speedX = (Math.random() - 0.5) * 2;
+        const speedY = (Math.random() - 0.5) * 2;
+        const color = `hsl(${Math.random() * 50 + 270}, 100%, 75%)`; // nuansa ungu
+        particles.push(new Particle(x, y, size, speedX, speedY, color));
+      }
+
+      function animate() {
+        ctx.fillStyle = "rgba(10, 0, 20, 0.2)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        if (particles.length < 200) createParticle();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      // Efek teks muncul seperti terminal
+      const message = document.getElementById("message");
+      setTimeout(() => {
+        message.style.opacity = "1";
+      }, 1500);
+    </script>
+  </body>
+</html>
